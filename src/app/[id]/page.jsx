@@ -30,7 +30,11 @@ export async function generateMetadata({ params }) {
  }
 
 
-
+const getTime=async()=>{
+  const res=await fetch("http://localhost:3000/time")
+  const data =await res.json()
+  return data.currentTime
+}
 
 const appPageDynamic = async({params}) => {
     const {id}=await params
@@ -38,8 +42,14 @@ const appPageDynamic = async({params}) => {
 
     // console.log("checking params",params)
     
+
+    //adding current local time
+    const time=await getTime()
+    console.log(time)
   return (
     <div className={`p-10 border m-4  ${inter.className}`}>
+
+      { time && <h3 className='text-center underline'>Current Time:{time}</h3>}
 
         <h4>id:{id}</h4>
         <p>title:{title}</p>

@@ -1,4 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+import { Bentham } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 
 
 
@@ -7,10 +10,18 @@ const fetchData=async()=>{
   const res= await data.json()
   return res
 }
+
+
+
+
+
  const Home=async()=>{
+
+
+
  
   const result=await fetchData()
-  console.log(result)
+  // console.log(result)
 
   return (
     
@@ -19,10 +30,11 @@ const fetchData=async()=>{
     <div className=" grid grid-cols-4 gap-8">
 
     {
-        result?.map(({body,title})=>(
-          <div className="border-cyan-300 border bg-black text-white " key={title}>
+        result?.map(({body,title,id})=>(
+          <div className="border-cyan-300 border p-4 bg-black text-white " key={title}>
             <h3>{title}</h3>
             <p>{body}</p>
+            <button className="underline text-blue-600"><Link href={`/${id}`}>See Details</Link></button>
           </div>
         ))
       }

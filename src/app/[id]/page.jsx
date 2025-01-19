@@ -5,6 +5,26 @@ const jsonData=async(id)=>{
     const data=res.json()
     return data
 }
+
+
+// adding meta data
+
+export async function generateMetadata({ params }) {
+  // read route params
+  const {id} =  await params
+ 
+  // fetch data
+  // const product = await fetch(`https://.../${id}`).then((res) => res.json())
+ 
+  return {
+    title:  `id:${id}`,
+  }
+  // optionally access and extend (rather than replace) parent metadata
+ }
+
+
+
+
 const appPageDynamic = async({params}) => {
     const {id}=await params
    const {title,body}=await jsonData(id)

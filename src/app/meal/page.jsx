@@ -3,7 +3,11 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
+
+
 const Page = () => {
+   
+
   const [keyword, setKeyword] = useState(""); // State to store the input value
   const [searchResult, setSearchResult] = useState(null); // State to store search results
   const [loading, setLoading] = useState(false); // Loading state
@@ -43,6 +47,7 @@ const Page = () => {
     return () => clearTimeout(delayDebounce); // Cleanup previous timer
   }, [keyword]);
 
+ 
   return (
     <div className="p-6 flex flex-col items-center min-h-screen bg-gray-100">
       <h1 className="text-2xl font-bold mb-4 text-gray-800">Search Meals</h1>
@@ -88,5 +93,5 @@ const Page = () => {
     </div>
   );
 };
-
+  
 export default Page;

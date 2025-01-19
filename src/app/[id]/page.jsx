@@ -1,3 +1,4 @@
+import { Inter, Roboto } from 'next/font/google'
 import React from 'react'
 
 const jsonData=async(id)=>{
@@ -5,6 +6,12 @@ const jsonData=async(id)=>{
     const data=res.json()
     return data
 }
+//adding font 
+const inter=Roboto({
+  subsets:['latin'],
+  weight:'900',
+  display:'swap'
+})
 
 
 // adding meta data
@@ -32,7 +39,7 @@ const appPageDynamic = async({params}) => {
     // console.log("checking params",params)
     
   return (
-    <div className='p-10 border m-4'>
+    <div className={`p-10 border m-4  ${inter.className}`}>
 
         <h4>id:{id}</h4>
         <p>title:{title}</p>

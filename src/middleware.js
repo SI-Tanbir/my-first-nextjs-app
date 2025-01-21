@@ -1,16 +1,26 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
-export function middleware(request){
- 
-    console.log('middleware trigger')
-    return NextResponse.redirect(new URL('/', request.url))
+export async function middleware (request) {
+  console.log('middleware trigger');
 
+  // Access cookies synchronously
+  const cookieStore = await cookies();
+  const token = cookieStore.get('next-auth.session-token');
 
+  // Debugging information
+  console.log('Token:', token);
+
+  if (token) {
+    // Allow the request to continue
+    return NextResponse.next();
+  }
+
+  // Redirect to login if no token
+  return NextResponse.redirect(new URL('/api/auth/signin', request.url));
+  
 }
 
-export const config ={
-
-    // matcher:'/dashboard'
-    matcher : ['/dashboard']
-    
+export const config={
+  matcher:['/dashboard']
 }

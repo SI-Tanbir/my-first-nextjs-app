@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { Bentham } from "next/font/google";
+import { getServerSession } from "next-auth";
+import { Bentham, Port_Lligat_Sans } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 
 
@@ -22,6 +24,15 @@ const fetchData=async()=>{
  
   const result=await fetchData()
   // console.log(result)
+
+  
+
+  //practign server session
+  const serverSession=  await getServerSession(authOptions)
+
+  console.log("getting server session :--",{serverSession})
+
+  // console.log(process.env.NEXTAUTH_SECRET)
 
   return (
     

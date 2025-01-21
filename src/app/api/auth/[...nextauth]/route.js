@@ -3,7 +3,11 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 
-const handler =NextAuth({
+
+export const authOptions={
+
+
+    secret: process.env.NEXTAUTH_SECRET, //adding secret here
 
     // first create session
     session:{
@@ -26,22 +30,31 @@ const handler =NextAuth({
 
             // it recevie the
             async authorize(credentials){
+                const {email,password}=credentials
                 if(!credentials){
                     return null;
                 }
                 else{
-                    return true
+                    return {...credentials}
+
                 }
             }
 
         })
 
     ],
+ 
+    // call back added extra data like admin role
+    // callback
 
     //seetting up pages where the page whill show up
     // page:[
 
     // ]
 
-})
+}
+
+const handler =NextAuth(authOptions)
+
+
 export {handler as GET , handler as POST}
